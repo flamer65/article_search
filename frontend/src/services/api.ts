@@ -52,12 +52,15 @@ class ApiService {
 
   constructor() {
     this.client = axios.create({
-      baseURL: import.meta.env.VERCEL_PUBLIC_API_URL || "http://localhost:3000/api",
+      baseURL:
+        import.meta.env.VERCEL_PUBLIC_API_URL || "http://localhost:3000/api",
       timeout: 30000,
       headers: {
         "Content-Type": "application/json",
       },
     });
+    console.log("Environment API URL:", import.meta.env.VITE_API_URL);
+    console.log("Final Base URL:", this.client.defaults.baseURL);
   }
 
   /**
