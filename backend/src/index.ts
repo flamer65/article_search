@@ -7,7 +7,7 @@ import { prisma } from "./lib/prisma.js";
 
 dotenv.config();
 
-const app: Express = express();
+export const app: Express = express();
 const PORT = process.env.PORT || 3000;
 
 const corsOrigins = process.env.CORS_ORIGINS?.split(",") || [
@@ -52,4 +52,9 @@ process.on("SIGINT", async () => {
   process.exit(0);
 });
 
-main();
+// Only start the server if we're not running in a serverless environment (e.g. Vercel)
+if (!process.env.VERCEL) {
+  main();
+}
+
+export default app;
